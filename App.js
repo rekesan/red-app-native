@@ -1,8 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+// import useSound from "react-native-use-sound";
 
 export default function App() {
+
+  // const [play, stop] = useSound(flop);
+ 
   const names = [
     "Nikolai",
     "Mika",
@@ -18,13 +22,42 @@ export default function App() {
     "Red",
   ];
 
-  const [name, setName] = useState("A name will appear here.");
+  const animals = [
+    '🐵',
+    '🐶',
+    '🐺',
+    '🦁',
+    '🐯',
+    '🦊',
+    '🦝',
+    '🐮',
+    '🐷',
+    '🐗',
+    '🐭',
+    '🐹',
+    '🐰',
+    '🐻',
+    '🐻‍❄️',
+    '🐨',
+    '🐼',
+    '🐲',
+    '🐔',
+    '🦄',
+    '🐴',
+    '🦓',
+    '🐸',
+  ]
+
+  const [name, setName] = useState("<No Name>");
 
   const handleButton = () => {
+    let newName;
     do {
       newName = findNewName();
     } while (newName === name);
+    newName = `${animals[Math.floor(Math.random() * animals.length)]}\n${newName}`;
     setName(newName);
+    // play();
   };
 
   const findNewName = () => {
@@ -35,7 +68,7 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.text}>{name}</Text>
       <Pressable onPress={() => handleButton()} style={styles.pressable}>
-        <Text style={styles.buttonText}>Click Me!</Text>
+        <Text style={styles.buttonText}>CLICK ME!</Text>
       </Pressable>
       <StatusBar style="auto" />
     </View>
@@ -45,12 +78,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#b8b8b8",
     alignItems: "center",
     justifyContent: "center",
   },
   text: {
-    color: "white",
+    color: "black",
     fontSize: 50,
     textAlign: "center",
   },
