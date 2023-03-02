@@ -4,25 +4,30 @@ import { names, animals } from "./data";
 import { CustomButton } from "./components/CustomButton";
 
 export default function App() {
-  const [name, setName] = useState("");
+  const [animal, setAnimal] = useState("[animal]");
+  const [name, setName] = useState("[name]");
 
   const handleButton = () => {
-    let newName;
-    do {
-      newName = findNewName();
-    } while (newName === name);
-    newName = `${
-      animals[Math.floor(Math.random() * animals.length)]
-    }\n${newName}`;
+    let newAnimal = getNewItem(animals, animal);
+    let newName = getNewItem(names, name);
+
     setName(newName);
+    setAnimal(newAnimal);
   };
 
-  const findNewName = () => {
-    return names[Math.floor(Math.random() * names.length)];
+  const getNewItem = (data, currItem) => {
+    let newItem;
+
+    do {
+      newItem = data[Math.floor(Math.random() * data.length)];
+    } while (newItem === currItem);
+
+    return newItem;
   };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>{animal}</Text>
       <Text style={styles.text}>{name}</Text>
       <CustomButton
         label="CLICK ME!"
@@ -43,8 +48,10 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 50,
     textAlign: "center",
-    height: 150,
-    width: '80%'
+    height: 75,
+    width: "80%",
+    fontWeight: 'bold',
+    color: '#b8b8b8'
   },
 });
 

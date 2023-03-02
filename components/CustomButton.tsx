@@ -1,15 +1,15 @@
-import { Pressable, Text } from "react-native";
+import { GestureResponderEvent, Pressable, StyleProp, Text, TextStyle } from "react-native";
 
-export const CustomButton = (props: CustomButtonProps) => {
+export const CustomButton = ({ label, style, onPress }: CustomButtonProps) => {
   return (
-    <Pressable onPress={props.onPress} style={props.style.button}>
-      <Text style={props.style.text}>{props.label}</Text>
+    <Pressable onPress={onPress} style={style.button}>
+      <Text style={style.text}>{label}</Text>
     </Pressable>
   );
 };
 
 interface CustomButtonProps {
   label: string;
-  style?: any;
-  onPress?: any;
+  style?: null | StyleProp<TextStyle> | any;
+  onPress?: null | ((event: GestureResponderEvent) => void) | undefined;
 }
