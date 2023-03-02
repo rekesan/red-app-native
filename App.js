@@ -1,63 +1,20 @@
-import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-// import useSound from "react-native-use-sound";
+import { StyleSheet, Text, View } from "react-native";
+import { names, animals } from "./data";
+import { CustomButton } from "./components/CustomButton";
 
 export default function App() {
-
-  // const [play, stop] = useSound(flop);
- 
-  const names = [
-    "Nikolai",
-    "Mika",
-    "Bernadeth",
-    "Carlo",
-    "Carl",
-    "Edmond",
-    "Edwin",
-    "Jayson",
-    "Jean",
-    "Marvin",
-    "Patricia",
-    "Red",
-  ];
-
-  const animals = [
-    '🐵',
-    '🐶',
-    '🐺',
-    '🦁',
-    '🐯',
-    '🦊',
-    '🦝',
-    '🐮',
-    '🐷',
-    '🐗',
-    '🐭',
-    '🐹',
-    '🐰',
-    '🐻',
-    '🐻‍❄️',
-    '🐨',
-    '🐼',
-    '🐲',
-    '🐔',
-    '🦄',
-    '🐴',
-    '🦓',
-    '🐸',
-  ]
-
-  const [name, setName] = useState("<No Name>");
+  const [name, setName] = useState("");
 
   const handleButton = () => {
     let newName;
     do {
       newName = findNewName();
     } while (newName === name);
-    newName = `${animals[Math.floor(Math.random() * animals.length)]}\n${newName}`;
+    newName = `${
+      animals[Math.floor(Math.random() * animals.length)]
+    }\n${newName}`;
     setName(newName);
-    // play();
   };
 
   const findNewName = () => {
@@ -67,10 +24,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{name}</Text>
-      <Pressable onPress={() => handleButton()} style={styles.pressable}>
-        <Text style={styles.buttonText}>CLICK ME!</Text>
-      </Pressable>
-      <StatusBar style="auto" />
+      <CustomButton
+        label="CLICK ME!"
+        onPress={handleButton}
+        style={buttonStyle}
+      />
     </View>
   );
 }
@@ -85,19 +43,22 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 50,
     textAlign: "center",
+    height: 150,
+    width: '80%'
   },
-  pressable: {
+});
+
+const buttonStyle = StyleSheet.create({
+  button: {
     width: 200,
     height: 50,
     backgroundColor: "black",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
-    borderColor: "white",
-    borderWidth: 2,
     marginTop: 50,
   },
-  buttonText: {
+  text: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
